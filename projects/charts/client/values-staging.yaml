@@ -6,7 +6,7 @@ image:
 
 ingressroute:
   routes:
-    - host: fdj-ca.staging.outworld.fr
+    - host: fdj-ca-staging.outworld.fr
       priority: 10
       services:
         - passHostHeader: true

@@ -6,7 +6,7 @@ image:
 
 ingressroute:
   routes:
-    - host: fdj-ca.development.outworld.fr
+    - host: fdj-ca-development.outworld.fr
       priority: 10
       services:
         - passHostHeader: true
