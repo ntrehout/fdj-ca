@@ -4,15 +4,6 @@ image:
   # -- image pull policy
   pullPolicy: Always
 
-ingressroute:
-  routes:
-    - host: fdj-ca-server.development.outworld.fr
-      priority: 10
-      services:
-        - passHostHeader: true
-          name: server-fdj-ca-server
-          port: 80
-
 backup:
   enabled: false
 
