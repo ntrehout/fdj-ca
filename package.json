@@ -40,7 +40,7 @@
     "@angular/language-service": "15.1.0",
     "@jscutlery/semver": "^2.29.3",
     "@nestjs/schematics": "^9.0.0",
-    "@nestjs/testing": "^9.0.0",
+    "@nestjs/testing": "9.2.1",
     "@nrwl/angular": "15.6.3",
     "@nrwl/cli": "15.6.3",
     "@nrwl/cypress": "15.6.3",
