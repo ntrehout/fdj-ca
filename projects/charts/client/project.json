@@ -1,0 +1,54 @@
+{
+  "projectType": "applications",
+  "name": "charts-client",
+  "targets": {
+    "helm-lint": {
+      "executor": "@otwld/nx-devops:run-commands",
+      "options": {
+        "parallel": false,
+        "cwd": "projects/charts/client",
+        "commands": [
+          {
+            "command": "helm dependency update",
+            "forwardAllArgs": false
+          },
+          {
+            "command": "helm lint .",
+            "forwardAllArgs": false
+          }
+        ]
+      }
+    },
+    "helm-publish": {
+      "executor": "@otwld/nx-devops:run-commands",
+      "options": {
+        "parallel": false,
+        "commands": [
+          {
+            "command": "helm package projects/charts/client --version ${PROJECT_VERSION} -u -d dist/projects/charts/client",
+            "forwardAllArgs": false
+          },
+          {
+            "command": "curl -u ${REGISTRY_USERNAME}:${REGISTRY_PASSWORD} https://nexus.outworld.fr/service/rest/v1/components?repository=helm-hosted -J -L -s -F file=@dist/projects/charts/client/fdj-ca-client-${PROJECT_VERSION}.tgz",
+            "forwardAllArgs": false
+          }
+        ]
+      }
+    },
+    "write-version": {
+      "executor": "@otwld/nx-devops:write-file",
+      "options": {
+        "filePath": "projects/charts/client/.env",
+        "content": "PROJECT_VERSION=${version}"
+      }
+    },
+    "version": {
+      "executor": "@jscutlery/semver:version",
+      "options": {
+        "preset": "angular",
+        "postTargets": ["charts-client:write-version"]
+      }
+    }
+  },
+  "tags": []
+}

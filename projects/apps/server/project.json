@@ -1,0 +1,119 @@
+{
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "projects/apps/server/src",
+  "projectType": "application",
+  "name": "apps-server",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/webpack:webpack",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/projects/apps/server",
+        "main": "projects/apps/server/src/main.ts",
+        "tsConfig": "projects/apps/server/tsconfig.app.json",
+        "assets": [
+          "projects/apps/server/src/assets"
+        ],
+        "webpackConfig": "projects/apps/server/webpack.config.js",
+        "generatePackageJson": true
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "projects/apps/api-otwld-fr/src/environments/environment.ts",
+              "with": "projects/apps/api-otwld-fr/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/node:node",
+      "options": {
+        "buildTarget": "apps-server:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["projects/apps/server/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/projects/apps/server"],
+      "options": {
+        "jestConfig": "projects/apps/server/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "helm-deploy": {
+      "executor": "@otwld/nx-devops:helm-deploy",
+      "configurations": {
+        "production": {
+          "namespace": "fdj-ca",
+          "valuesPath": ["values.yaml", "values-production.yaml"]
+        },
+        "staging": {
+          "namespace": "staging",
+          "valuesPath": ["values.yaml", "values-staging.yaml"]
+        }
+      },
+      "options": {
+        "cwd": "projects/charts/server",
+        "chartPath": ".",
+        "releaseName": "server",
+        "namespace": "development",
+        "valuesPath": ["values.yaml", "values-development.yaml"]
+      }
+    },
+    "docker-publish": {
+      "executor": "@nx-tools/nx-container:build",
+      "configurations": {
+        "production": {
+          "tags": [
+            "docker.outworld.fr/fdj-ca/server:${TAG_LATEST_FORMAT}",
+            "docker.outworld.fr/fdj-ca/server:${PROJECT_VERSION}"
+          ]
+        },
+        "staging": {
+          "tags": [
+            "docker.outworld.fr/fdj-ca/server:${TAG_LATEST_FORMAT}",
+            "docker.outworld.fr/fdj-ca/server:${PROJECT_VERSION}"
+          ]
+        }
+      },
+      "options": {
+        "push": true,
+        "file": "projects/apps/server/Dockerfile",
+        "tags": [
+          "docker.outworld.fr/fdj-ca/server:${TAG_LATEST_FORMAT}"
+        ]
+      }
+    },
+    "write-version": {
+      "executor": "@otwld/nx-devops:write-file",
+      "options": {
+        "filePath": "projects/apps/server/.env",
+        "content": "PROJECT_VERSION=${version}"
+      }
+    },
+    "version": {
+      "executor": "@jscutlery/semver:version",
+      "options": {
+        "preset": "angular",
+        "postTargets": ["apps-server:write-version"]
+      }
+    }
+  },
+  "tags": []
+}

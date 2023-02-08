@@ -1,0 +1,6 @@
+dependencies:
+- name: common
+  repository: https://nexus.outworld.fr/repository/helm-hosted/
+  version: 1.0.10
+digest: sha256:715caa3b3b26c285a2f9665129aec318e9e6b0ca3c8300e88e7b1e59acca7dee
+generated: "2022-10-15T01:49:06.1811787+08:00"

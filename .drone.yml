@@ -1,0 +1,38 @@
+kind: template
+load: otwld-latest.yaml
+
+data:
+  workspace:
+    appsPath: projects
+  cache:
+    enabled: false
+  image:
+    tag: latest
+  setup:
+    enabled: true
+  build:
+    enabled: true
+  lint:
+    enabled: true
+  test:
+    enabled: true
+  version:
+    enabled: true
+  e2e:
+    enabled: false
+  docker:
+    enabled: true
+  npm:
+    publish:
+      enabled: false
+  helm:
+    deploy:
+      enabled: true
+    lint:
+      enabled: true
+    publish:
+      enabled: true
+  kubeval:
+    enabled: false
+  drone:
+    enabled: false

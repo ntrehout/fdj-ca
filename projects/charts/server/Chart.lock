@@ -1,0 +1,9 @@
+dependencies:
+- name: common
+  repository: https://nexus.outworld.fr/repository/helm-hosted/
+  version: 1.0.10
+- name: mongodb
+  repository: https://charts.bitnami.com/bitnami
+  version: 12.1.16
+digest: sha256:ae71dfdd3fbd1637422623a32eaddbb99937e150474339d7b384b813a9b74b76
+generated: "2023-02-07T16:41:28.0956058+01:00"

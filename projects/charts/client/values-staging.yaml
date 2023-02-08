@@ -1,0 +1,24 @@
+image:
+  # -- image tag
+  tag: 'latest-rc'
+  # -- image pull policy
+  pullPolicy: Always
+
+ingressroute:
+  routes:
+    - host: fdj-ca.staging.outworld.fr
+      priority: 10
+      services:
+        - passHostHeader: true
+          name: client-fdj-ca-client
+          port: 80
+
+backup:
+  enabled: false
+
+env:
+  NODE_ENV: staging
+
+persistence:
+  media:
+    size: 512Mi

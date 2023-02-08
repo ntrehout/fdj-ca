@@ -1,0 +1,9 @@
+apiVersion: v2
+name: fdj-ca-client
+description: Client for the NRWL coding assignment
+version: 0.0.1
+kubeVersion: ">=1.16.0-0"
+dependencies:
+  - name: common
+    repository: https://nexus.outworld.fr/repository/helm-hosted/
+    version: 1.x.x

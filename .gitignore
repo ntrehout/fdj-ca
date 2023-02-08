@@ -1,0 +1,29 @@
+# Helm
+**/charts/*.tgz
+
+# nx
+.nxignore
+.nxcache
+.nx-container
+
+# dependencies
+/node_modules
+
+# testing
+/coverage
+
+# production
+/dist
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+.idea
+
+
+.angular

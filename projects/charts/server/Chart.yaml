@@ -1,0 +1,12 @@
+apiVersion: v2
+name: fdj-ca-server
+description: Server for the NRWL coding assignment
+version: 0.0.1
+kubeVersion: ">=1.16.0-0"
+dependencies:
+  - name: common
+    repository: https://nexus.outworld.fr/repository/helm-hosted/
+    version: 1.x.x
+  - name: mongodb
+    version: 12.1.16
+    repository: https://charts.bitnami.com/bitnami

@@ -1,0 +1,139 @@
+#
+# IMPORTANT NOTE
+#
+# This chart inherits from our common library chart. You can check the default values/options here:
+# https://github.com/k8s-at-home/library-charts/tree/main/charts/stable/common/values.yaml
+#
+
+image:
+  # -- image repository
+  repository: docker.outworld.fr/fdj-ca/server
+  # -- image tag
+  tag: 'latest'
+  # -- image pull policy
+  pullPolicy: Always
+
+imagePullSecrets:
+  - name: dockerconfig-secret
+
+ingressroute:
+  enabled: true
+  annotations: { }
+  # kubernetes.io/ingress.class: nginx
+  # kubernetes.io/tls-acme: "true"
+  tls: true
+  routes:
+
+mongodb:
+  metrics:
+    enabled: true
+  auth:
+    enabled: true
+    usernames:
+      - fdj-ca
+    databases:
+      - fdjCA
+  persistence:
+    enabled: true
+    size: 1Gi
+    storageClass: "longhorn"
+
+backup:
+  enabled: false
+  includeClusterResources: true
+  snapshotVolumes: true
+  storageLocation: backups-short-ttl
+  volumeSnapshotLocations:
+    - ovhcloud
+
+# -- environment variables. See [image docs](https://jellyfin.org/docs/general/administration/configuration.html) for more details.
+# @default -- See below
+env:
+  # -- Set the container timezone
+  TZ: UTC
+  PORT: 80
+
+  MONGODB_PORT: 27017
+  MONGODB_USERNAME: fdj-ca
+  MONGODB_DATABASE: fdjCA
+  MONGODB_HOST: server-mongodb.fdj-ca.svc.cluster.local
+  MONGODB_PASSWORD:
+    valueFrom:
+      secretKeyRef:
+        name: server-mongodb
+        key: mongodb-passwords
+
+# -- Specify any additional containers here as dictionary items. Each additional container should have its own key.
+# Helm templates can be used.
+additionalContainers: { }
+
+# -- Configures service settings for the chart.
+# @default -- See values.yaml
+service:
+  main:
+    enabled: true
+    ports:
+      http:
+        port: 80
+
+controller:
+  # -- enable the controller.
+  enabled: true
+  replicas: 1
+
+ingress:
+  # -- Enable and configure ingress settings for the chart under this key.
+  # @default -- See values.yaml
+  main:
+    enabled: false
+
+# -- Configure persistence settings for the chart under this key.
+# @default -- See values.yaml
+persistence:
+  config:
+    enabled: false
+    type: pvc
+    accessMode: ReadWriteOnce
+    storageClass: longhorn
+    size: 5Gi
+
+  # Cache does NOT contain temporary transcoding data.
+  cache:
+    enabled: false
+    mountPath: /cache
+
+  media:
+    enabled: false
+    mountPath: /media
+    type: pvc
+    accessMode: ReadWriteOnce
+    storageClass: longhorn
+    size: 1Gi
+
+# -- Configure the Security Context for the Pod
+podSecurityContext: { }
+#   runAsUser: 568
+#   runAsGroup: 568
+#   fsGroup: 568
+#   # Hardware acceleration using an Intel iGPU w/ QuickSync
+#   # These IDs below should be matched to your `video` and `render` group on the host
+#   # To obtain those IDs run the following grep statement on the host:
+#   # $ cat /etc/group | grep "video\|render"
+#   # video:x:44:
+#   # render:x:109:
+#   supplementalGroups:
+#   - 44
+#   - 109
+
+# resources:
+#   requests:
+#     # Hardware acceleration using an Intel iGPU w/ QuickSync and
+#     # using intel-gpu-plugin (https://github.com/intel/intel-device-plugins-for-kubernetes)
+#     gpu.intel.com/i915: 1
+#     cpu: 200m
+#     memory: 256Mi
+#   limits:
+#     # Hardware acceleration using an Intel iGPU w/ QuickSync and
+#     # using intel-gpu-plugin (https://github.com/intel/intel-device-plugins-for-kubernetes)
+#     gpu.intel.com/i915: 1
+#     memory: 4096Mi
