@@ -18,6 +18,7 @@ backup:
 
 env:
   NODE_ENV: production
+  MONGODB_HOST: server-mongodb.fdj-ca.svc.cluster.local
 
 persistence:
   media:

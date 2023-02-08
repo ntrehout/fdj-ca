@@ -18,6 +18,7 @@ backup:
 
 env:
   NODE_ENV: staging
+  MONGODB_HOST: server-mongodb.staging.svc.cluster.local
 
 persistence:
   media:
