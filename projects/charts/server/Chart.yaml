@@ -1,6 +1,6 @@
 apiVersion: v2
 name: fdj-ca-server
-description: Server for the NRWL coding assignment
+description: Server for the FDJ coding assignment
 version: 0.0.1
 kubeVersion: ">=1.16.0-0"
 dependencies:

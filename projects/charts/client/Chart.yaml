@@ -1,6 +1,6 @@
 apiVersion: v2
 name: fdj-ca-client
-description: Client for the NRWL coding assignment
+description: Client for the FDJ coding assignment
 version: 0.0.1
 kubeVersion: ">=1.16.0-0"
 dependencies:
