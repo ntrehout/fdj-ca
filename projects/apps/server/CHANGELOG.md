@@ -2,6 +2,10 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.1.1](https://github.com/ntrehout/fdj-ca/compare/apps-server-0.1.0...apps-server-0.1.1) (2023-02-08)
+
+
+
 # 0.1.0 (2023-02-08)
 
 
