@@ -29,6 +29,17 @@ mongodb:
     registry: docker.io
     repository: bitnami/mongodb
     tag: 4.4.15-debian-10-r8
+  initdbScripts:
+    init.sh: |
+      mkdir -p /tmp/mongodb-data
+      curl https://nexus.outworld.fr/repository/artifacts/fdj-ca/mongodb/leagues.bson -o /tmp/mongodb-data/leagues.bson
+      curl https://nexus.outworld.fr/repository/artifacts/fdj-ca/mongodb/leagues.metadata.json -o /tmp/mongodb-data/leagues.metadata.json
+      curl https://nexus.outworld.fr/repository/artifacts/fdj-ca/mongodb/teams.bson -o /tmp/mongodb-data/teams.bson
+      curl https://nexus.outworld.fr/repository/artifacts/fdj-ca/mongodb/teams.metadata.json -o /tmp/mongodb-data/teams.metadata.json
+      curl https://nexus.outworld.fr/repository/artifacts/fdj-ca/mongodb/players.bson -o /tmp/mongodb-data/players.bson
+      curl https://nexus.outworld.fr/repository/artifacts/fdj-ca/mongodb/players.metadata.json -o /tmp/mongodb-data/players.metadata.json
+      mongorestore -u $MONGODB_EXTRA_USERNAMES -p $MONGODB_EXTRA_PASSWORDS --authenticationDatabase $MONGODB_EXTRA_DATABASES -d $MONGODB_EXTRA_DATABASES /tmp/mongodb-data
+
   updateStrategy:
   metrics:
     enabled: true
@@ -62,7 +73,6 @@ env:
   MONGODB_PORT: 27017
   MONGODB_USERNAME: fdj-ca
   MONGODB_DATABASE: fdjCA
-  MONGODB_HOST: server-mongodb.fdj-ca.svc.cluster.local
   MONGODB_PASSWORD:
     valueFrom:
       secretKeyRef:
