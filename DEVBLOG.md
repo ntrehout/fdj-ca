@@ -1,6 +1,6 @@
 # Devblog
 
-## February 7th, 2023 | DevOps & Architecture | 2 hours
+## February 8th, 2023 | DevOps & Architecture | 2 hours
 
 Implementation of the necessary elements in order to use my homemade - nx based - tools.
 
@@ -30,3 +30,4 @@ Corrections and adjustments were made to ensure the proper functioning of my hom
 * High level ESLint rules for RxJS by Cartan
 * The client's nginx can proxy_pass /api through a Kubernetes Service to the Backend
 * All my homemade tools works perfectly for this repository. While I could have avoided this loss of time by starting from scratch with a new repository that would be perfectly compatible with my tools, I chose to understand the source of the problem with (@nrwl/devkit:15.4.5) in order to create a task in my own board and develop my tools further.
+
