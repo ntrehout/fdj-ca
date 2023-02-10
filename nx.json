@@ -8,13 +8,7 @@
     "default": {
       "runner": "@nrwl/nx-cloud",
       "options": {
-        "cacheableOperations": [
-          "build",
-          "test",
-          "ssr",
-          "e2e",
-          "swagger"
-        ],
+        "cacheableOperations": ["build", "test", "ssr", "e2e", "swagger"],
         "cacheDirectory": ".nxcache",
         "accessToken": "MmI4NzZjMmUtZDc2ZS00ZTM3LThhOTAtNjA1ZWRiMTQ3ODIyfHJlYWQtd3JpdGU="
       }
