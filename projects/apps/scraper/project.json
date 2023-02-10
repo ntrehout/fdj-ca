@@ -1,0 +1,64 @@
+{
+  "name": "apps-scraper",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/projects/apps/scraper",
+        "format": ["cjs"],
+        "main": "projects/apps/scraper/src/main.ts",
+        "tsConfig": "projects/apps/scraper/tsconfig.app.json",
+        "assets": ["projects/apps/scraper/src/assets"]
+      }
+    },
+    "generate": {
+      "dependsOn": ["build"],
+      "executor": "@otwld/nx-devops:run-commands",
+      "outputs": ["dump.json"],
+      "options": {
+        "commands": [
+          {
+            "command": "node dist/projects/apps/scraper/main.cjs dist/full-dump.json"
+          }
+        ]
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/js:node",
+      "options": {
+        "buildTarget": "scraper:build"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "scraper:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["projects/apps/scraper/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "projects/apps/scraper/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": []
+}

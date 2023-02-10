@@ -3,6 +3,7 @@
   "version": 2,
   "projects": {
     "apps-client": "projects/apps/client",
+    "apps-scraper": "projects/apps/scraper",
     "apps-server": "projects/apps/server",
     "charts-client": "projects/charts/client",
     "charts-server": "projects/charts/server",
