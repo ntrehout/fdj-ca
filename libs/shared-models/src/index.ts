@@ -32,3 +32,22 @@ export interface IPlayer {
   };
   thumbnail: string;
 }
+
+export type Response<T> = SuccessResponse<T> | ErrorResponse;
+
+export type BaseResponse = {
+  timestamp: string;
+};
+
+export type SuccessResponse<T> = {
+  success: true;
+  data: T;
+  statusCode: number;
+} & BaseResponse;
+export type ErrorResponse = {
+  success: false;
+  error: {
+    message: string;
+  };
+  statusCode: number;
+} & BaseResponse;
