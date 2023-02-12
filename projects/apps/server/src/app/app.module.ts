@@ -5,6 +5,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import mongodb from '../config/mongodb.config';
 import { LeagueModule } from './modules/league/league.module';
 import { TeamModule } from './modules/team/team.module';
+import { PlayerModule } from './modules/player/player.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { TeamModule } from './modules/team/team.module';
     HelloWorldModule,
     LeagueModule,
     TeamModule,
+    PlayerModule,
   ],
 })
 export class AppModule {}
