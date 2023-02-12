@@ -3,7 +3,7 @@ import * as mongooseUtils from './utils/mongoose';
 import * as apiUtils from './utils/api';
 import * as fsUtils from './utils/fs';
 import { of } from 'rxjs';
-import { League, Team } from '@fdj-ca/shared-models';
+import { ILeague, ITeam } from '@fdj-ca/shared-models';
 
 jest.setTimeout(600000);
 
@@ -15,16 +15,16 @@ const mockedFsUtils = jest.mocked(fsUtils, true);
 
 describe('Scraper', () => {
   it('should create 1 League + 1 Team + 10 Players', async () => {
-    const leagues: League[] = [
+    const leagues: ILeague[] = [
       {
         name: 'Ligue 1',
         sport: 'soccer',
       },
     ];
-    const teams: Team[] = [
+    const teams: ITeam[] = [
       {
         name: 'Paris Saint-Germain',
-      } as Team,
+      } as ITeam,
     ];
     mockedAPIUtils.getLeaguesByStrSport.mockReturnValue(of(leagues));
     mockedAPIUtils.getTeamsByLeagueName.mockReturnValue(of(teams));

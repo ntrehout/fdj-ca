@@ -1,6 +1,6 @@
 import { from, of, switchMap, tap, zip } from 'rxjs';
 import mongoose, { Schema } from 'mongoose';
-import { League, Player, Team } from '@fdj-ca/shared-models';
+import { ILeague, IPlayer, ITeam } from '@fdj-ca/shared-models';
 import { VM } from '../main';
 
 export const connect = () =>
@@ -26,7 +26,10 @@ export const connect = () =>
   );
 
 const Players = mongoose.model('players', new Schema({}, { strict: false }));
-export const createPlayers = (connection: typeof mongoose, players: Player[]) =>
+export const createPlayers = (
+  connection: typeof mongoose,
+  players: IPlayer[]
+) =>
   from(Players.insertMany(players)).pipe(
     tap((players) => console.info('Created players', players.length))
   );
@@ -34,7 +37,7 @@ export const createPlayers = (connection: typeof mongoose, players: Player[]) =>
 const Teams = mongoose.model('teams', new Schema({}, { strict: false }));
 export const createTeam = (
   connection: typeof mongoose,
-  team: Team,
+  team: ITeam,
   playerIDs: string[]
 ) => {
   console.info('Creating team', team.name);
@@ -50,7 +53,7 @@ const Leagues = mongoose.model('leagues', new Schema({}, { strict: false }));
 
 export const createLeague = (
   connection: typeof mongoose,
-  league: League,
+  league: ILeague,
   teamIDs: string[]
 ) => {
   console.info('Creating league', league.name);

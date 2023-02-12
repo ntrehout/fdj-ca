@@ -2,17 +2,17 @@ import { firstValueFrom, map, of, switchMap, tap } from 'rxjs';
 import { connect, insertVMInDatabase } from './utils/mongoose';
 import { writeJSON$ } from './utils/fs';
 import { scrapLeaguesTeamsAndPlayers } from './utils/scrap';
-import { League, Player, Team } from '@fdj-ca/shared-models';
+import { ILeague, IPlayer, ITeam } from '@fdj-ca/shared-models';
 
 export type VM = Array<
   {
-    [Key in keyof Omit<League, 'teams'>]: League[Key];
+    [Key in keyof Omit<ILeague, 'teams'>]: ILeague[Key];
   } & {
     teams:
       | Array<
           {
-            [Key in keyof Omit<Team, 'players'>]: Team[Key];
-          } & { players: Player[] | string[] }
+            [Key in keyof Omit<ITeam, 'players'>]: ITeam[Key];
+          } & { players: IPlayer[] | string[] }
         >
       | string[];
   }

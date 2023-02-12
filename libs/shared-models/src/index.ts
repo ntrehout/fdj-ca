@@ -1,4 +1,4 @@
-export interface Team {
+export interface ITeam {
   name: string;
   thumbnail: string;
   banner: string;
@@ -14,21 +14,21 @@ export interface Team {
     location: string;
     capacity: number;
     thumbnail: string;
-  }
+  };
 }
 
-export interface League {
+export interface ILeague {
   name: string;
   sport: string;
 }
 
-export interface Player {
+export interface IPlayer {
   born: Date;
   name: string;
   position: 'Forward' | 'Midfielder' | 'Defender' | 'Goalkeeper';
   signin: {
     amount: number;
     currency: string;
-  }
+  };
   thumbnail: string;
 }

@@ -1,6 +1,6 @@
 import { from, map, Observable, tap } from 'rxjs';
 import axios from 'axios';
-import { League, Player, Team } from '@fdj-ca/shared-models';
+import { ILeague, IPlayer, ITeam } from '@fdj-ca/shared-models';
 import { League as ThirdPartyLeague } from '../models/league';
 import { Team as ThirdPartyTeam } from '../models/team';
 import { randFullName, randImg, randNumber, randPastDate } from '@ngneat/falso';
@@ -10,7 +10,7 @@ import { randFullName, randImg, randNumber, randPastDate } from '@ngneat/falso';
  * @param team
  */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const generateFakePlayersForTeam = (team: Team): Player[] =>
+export const generateFakePlayersForTeam = (team: ITeam): IPlayer[] =>
   [...Array(10)].map(() => ({
     name: randFullName(),
     born: randPastDate(),
@@ -22,14 +22,14 @@ export const generateFakePlayersForTeam = (team: Team): Player[] =>
         'Defender',
         'Goalkeeper',
         'Midfielder',
-      ] as Player['position'][]
+      ] as IPlayer['position'][]
     )[randNumber({ max: 3, min: 0 })],
   }));
 /**
  * Get all teams from a league.
  * @param league
  */
-export const getTeamsByLeagueName = (league: string): Observable<Team[]> => {
+export const getTeamsByLeagueName = (league: string): Observable<ITeam[]> => {
   return from(
     axios.get<{ teams: ThirdPartyTeam[] }>(
       `https://www.thesportsdb.com/api/v1/json/3/search_all_teams.php?l=${league}`,
@@ -75,7 +75,7 @@ export const getTeamsByLeagueName = (league: string): Observable<Team[]> => {
  * Get all soccer leagues.
  * @param limit
  */
-export const getLeaguesByStrSport = (limit: number): Observable<League[]> =>
+export const getLeaguesByStrSport = (limit: number): Observable<ILeague[]> =>
   from(
     axios.get<{ leagues: ThirdPartyLeague[] }>(
       'https://www.thesportsdb.com/api/v1/json/3/all_leagues.php'
@@ -93,7 +93,7 @@ export const getLeaguesByStrSport = (limit: number): Observable<League[]> =>
             ({
               name: league.strLeague,
               sport: 'soccer',
-            } as League)
+            } as ILeague)
         )
     ),
     map((leagues) => leagues.slice(0, limit))
