@@ -1,4 +1,8 @@
+import { Observable } from "rxjs";
+import { GetAllQueryParams } from "./types/query-params.types";
+
 export interface ITeam {
+  _id: string;
   name: string;
   thumbnail: string;
   banner: string;
@@ -15,11 +19,13 @@ export interface ITeam {
     capacity: number;
     thumbnail: string;
   };
+  players: string[];
 }
 
 export interface ILeague {
   name: string;
   sport: string;
+  teams: string[];
 }
 
 export interface IPlayer {
@@ -51,3 +57,12 @@ export type ErrorResponse = {
   };
   statusCode: number;
 } & BaseResponse;
+
+export interface ICrudService<T> {
+  getAll(query: GetAllQueryParams<T>): Observable<unknown>;
+  getManyByIDs(ids: string[]): Observable<unknown>;
+  getManyByName(name: string): Observable<unknown>;
+  getOneByID(id: string): Observable<unknown>;
+}
+
+export * from './types/query-params.types';

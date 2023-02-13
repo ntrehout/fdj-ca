@@ -1,0 +1,77 @@
+<div class="min-h-screen">
+  <div class="navbar z-[60] top-0 fixed bg-primary text-primary-content">
+    <div class="navbar-start">
+      <div class="dropdown">
+        <label class="btn btn-ghost btn-circle" tabindex="0">
+          <svg
+            class="h-5 w-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M4 6h16M4 12h16M4 18h7"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            />
+          </svg>
+        </label>
+        <ul
+          class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+          tabindex="0"
+        >
+          <li><a>Homepage</a></li>
+          <li><a>Portfolio</a></li>
+          <li><a>About</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="navbar-center">
+      <a class="btn btn-ghost normal-case text-xl">FDJ-CA</a>
+    </div>
+    <div class="navbar-end">
+      <button class="btn btn-ghost btn-circle">
+        <div class="indicator">
+          <svg
+            class="h-5 w-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            />
+          </svg>
+          <span class="badge badge-xs badge-secondary indicator-item"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+  <fdj-ca-drawer></fdj-ca-drawer>
+  <div class="py-20 px-8 h-full">
+    <router-outlet></router-outlet>
+  </div>
+  <div class="btm-nav">
+    <a [routerLinkActive]="['active', 'text-primary']" routerLink="/home">
+      <fa-icon [icon]="faHome"></fa-icon>
+      <span class="btm-nav-label">Home</span>
+    </a>
+    <a
+      [routerLinkActive]="['active', 'text-primary']"
+      routerLink="/search/leagues"
+    >
+      <fa-icon [icon]="faTrophy"></fa-icon>
+      <span class="btm-nav-label">Leagues</span>
+    </a>
+    <a [routerLinkActive]="['active', 'text-primary']" routerLink="/teams">
+      <fa-icon [icon]="faUsers"></fa-icon>
+      <span class="btm-nav-label">Teams</span>
+    </a>
+  </div>
+</div>

@@ -1,0 +1,8 @@
+<ul class="h-full menu bg-base-100 w-full rounded-box flex-nowrap">
+  <li
+    *ngFor="let league of leagues; let index = index"
+    [routerLink]="['/leagues', league._id]"
+  >
+    <a>{{ league.name }}</a>
+  </li>
+</ul>

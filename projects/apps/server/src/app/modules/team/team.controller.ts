@@ -1,18 +1,14 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
-import { GetAllQueryParams } from '../../types/query-params.types';
-import { TeamService } from './team.service';
+import { Controller, Get, Param, Query } from "@nestjs/common";
+import { TeamService } from "./team.service";
+import { GetAllQueryParams, ITeam } from "@fdj-ca/shared-models";
 
 @Controller('teams')
 export class TeamController {
   constructor(private readonly teamService: TeamService) {}
 
   @Get()
-  getAll(@Query() queryParams: GetAllQueryParams & { name: string }) {
-    if (queryParams.name) {
-      return this.teamService.getManyByName(queryParams.name);
-    } else {
-      return this.teamService.getAll(queryParams);
-    }
+  getAll(@Query() queryParams: GetAllQueryParams<ITeam>) {
+    return this.teamService.getAll(queryParams);
   }
 
   @Get(':id')

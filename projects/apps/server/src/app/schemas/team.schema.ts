@@ -1,11 +1,12 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import mongoose, { Document } from 'mongoose';
-import { ITeam } from '@fdj-ca/shared-models';
+import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import { Document } from "mongoose";
+import { ITeam } from "@fdj-ca/shared-models";
 
 export type TeamDocument = Team & Document;
 
 @Schema()
 export class Team implements ITeam {
+  _id: string;
   @Prop({ required: true })
   name: string;
   @Prop({ required: false })
@@ -33,7 +34,7 @@ export class Team implements ITeam {
   website: string;
   @Prop({ required: false })
   youtube: string;
-  @Prop({ required: true, type: mongoose.Schema.Types.ObjectId, ref: 'Player' })
+  @Prop({ required: true })
   players: string[];
 }
 

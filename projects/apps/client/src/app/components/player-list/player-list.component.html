@@ -1,0 +1,22 @@
+<div class="flex flex-col space-y-8">
+  <div *ngFor="let player of players" class="card w-full bg-base-100 shadow-xl">
+    <figure class="px-10 pt-10">
+      <img
+        alt="Thumbnail"
+        class="rounded-xl"
+        isInViewport
+        srcWhenInViewport="{{ player.thumbnail }}"
+      />
+    </figure>
+    <div class="card-body items-center text-center">
+      <h2 class="card-title">{{ player.name }}</h2>
+      <p>{{ player.born | date }}</p>
+      <div class="card-actions justify-end">
+        <div class="badge badge-outline">{{ player.position }}</div>
+        <div class="badge badge-outline">
+          {{ player.signin.amount }}{{ player.signin.currency }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

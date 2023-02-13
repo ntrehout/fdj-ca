@@ -1,9 +1,9 @@
-import * as scraper from './main';
-import * as mongooseUtils from './utils/mongoose';
-import * as apiUtils from './utils/api';
-import * as fsUtils from './utils/fs';
-import { of } from 'rxjs';
-import { ILeague, ITeam } from '@fdj-ca/shared-models';
+import * as scraper from "./main";
+import * as mongooseUtils from "./utils/mongoose";
+import * as apiUtils from "./utils/api";
+import * as fsUtils from "./utils/fs";
+import { of } from "rxjs";
+import { ILeague, ITeam } from "@fdj-ca/shared-models";
 
 jest.setTimeout(600000);
 
@@ -19,6 +19,7 @@ describe('Scraper', () => {
       {
         name: 'Ligue 1',
         sport: 'soccer',
+        teams: [],
       },
     ];
     const teams: ITeam[] = [

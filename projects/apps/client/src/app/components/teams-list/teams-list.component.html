@@ -1,0 +1,11 @@
+<ul class="flex flex-col space-y-8">
+  <li *ngFor="let team of teams">
+    <a [routerLink]="['/teams', team._id]">
+      <img
+        class="mx-auto h-32 w-32"
+        isInViewport
+        srcWhenInViewport="{{ team.thumbnail }}"
+      />
+    </a>
+  </li>
+</ul>

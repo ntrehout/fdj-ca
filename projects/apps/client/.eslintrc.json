@@ -15,7 +15,7 @@
         "@angular-eslint/component-class-suffix": [
           "error",
           {
-            "suffixes": ["Component", "Page"]
+            "suffixes": ["Component", "Page", "Layout"]
           }
         ],
         "@angular-eslint/directive-selector": [

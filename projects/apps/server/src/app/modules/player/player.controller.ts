@@ -1,6 +1,6 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
-import { GetAllQueryParams } from '../../types/query-params.types';
-import { PlayerService } from './player.service';
+import { Controller, Get, Param, Query } from "@nestjs/common";
+import { PlayerService } from "./player.service";
+import { GetAllQueryParams, IPlayer } from "@fdj-ca/shared-models";
 
 @Controller('players')
 export class PlayerController {
@@ -8,15 +8,9 @@ export class PlayerController {
 
   @Get()
   getAll(
-    @Query() queryParams: GetAllQueryParams & { name?: string; teamID?: string }
+    @Query() queryParams: GetAllQueryParams<IPlayer> & { teamID: string }
   ) {
-    if (queryParams.name) {
-      return this.playerService.getManyByName(queryParams.name);
-    } else if (queryParams.teamID) {
-      return this.playerService.getManyByTeamID(queryParams.teamID);
-    } else {
-      return this.playerService.getAll(queryParams);
-    }
+    return this.playerService.getAll(queryParams);
   }
 
   @Get(':id')

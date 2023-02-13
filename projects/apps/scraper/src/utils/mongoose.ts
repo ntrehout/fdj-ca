@@ -1,7 +1,7 @@
-import { from, of, switchMap, tap, zip } from 'rxjs';
-import mongoose, { Schema } from 'mongoose';
-import { ILeague, IPlayer, ITeam } from '@fdj-ca/shared-models';
-import { VM } from '../main';
+import { from, of, switchMap, tap, zip } from "rxjs";
+import mongoose, { Schema } from "mongoose";
+import { ILeague, IPlayer, ITeam } from "@fdj-ca/shared-models";
+import { VM } from "../main";
 
 export const connect = () =>
   from(
@@ -84,7 +84,7 @@ export const insertVMInDatabase = (connector: typeof mongoose, leagues: VM) =>
         switchMap((teams) =>
           createLeague(
             connector,
-            league,
+            league as any,
             teams.flatMap((team) => team._id as string)
           )
         )

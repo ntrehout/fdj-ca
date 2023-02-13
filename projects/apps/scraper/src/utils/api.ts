@@ -1,9 +1,9 @@
-import { from, map, Observable, tap } from 'rxjs';
-import axios from 'axios';
-import { ILeague, IPlayer, ITeam } from '@fdj-ca/shared-models';
-import { League as ThirdPartyLeague } from '../models/league';
-import { Team as ThirdPartyTeam } from '../models/team';
-import { randFullName, randImg, randNumber, randPastDate } from '@ngneat/falso';
+import { from, map, Observable, tap } from "rxjs";
+import axios from "axios";
+import { ILeague, IPlayer, ITeam } from "@fdj-ca/shared-models";
+import { League as ThirdPartyLeague } from "../models/league";
+import { Team as ThirdPartyTeam } from "../models/team";
+import { randFullName, randImg, randNumber, randPastDate } from "@ngneat/falso";
 
 /**
  * Generate 10 random players.
@@ -49,6 +49,7 @@ export const getTeamsByLeagueName = (league: string): Observable<ITeam[]> => {
     map((response) => response.data.teams || []),
     map((teams) =>
       teams.map((team) => ({
+        _id: '',
         name: team.strTeam,
         thumbnail: team.strTeamBadge,
         players: [],

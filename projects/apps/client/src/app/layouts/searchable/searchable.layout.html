@@ -1,0 +1,61 @@
+<div class="relative h-full container mx-auto">
+  <div class="navbar z-10 left-0 flex-col md:flex-row bg-base-100">
+    <div class="flex-1">
+      <div class="dropdown dropdown-bottom">
+        <label class="btn btn-ghost" tabindex="0"> Sort</label>
+        <ul
+          class="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
+          tabindex="0"
+        >
+          <li>
+            <a
+              (click)="service.setSort('asc')"
+              [class.active]="(service.onSortChange$() | async) === 'asc'"
+            >
+              <fa-icon [icon]="faAscending"></fa-icon>
+              Ascending
+            </a>
+          </li>
+          <li>
+            <a
+              (click)="service.setSort('desc')"
+              [class.active]="(service.onSortChange$() | async) === 'desc'"
+            >
+              <fa-icon [icon]="faDescending"></fa-icon>
+              Descending
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="dropdown dropdown-bottom dropdown-end">
+        <label class="btn btn-ghost" tabindex="0"> Limit </label>
+        <ul
+          class="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
+          tabindex="0"
+        >
+          <li *ngFor="let limit of [10,20,50,100]">
+            <a
+              (click)="service.setLimit(limit)"
+              [class.active]="(service.onLimitChange$() | async) === limit"
+            >
+              {{limit}}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="flex-none gap-2">
+      <div class="form-control">
+        <input
+          [formControl]="service.getForm()"
+          class="input input-bordered"
+          placeholder="Search"
+          type="text"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="h-full mb-20">
+    <router-outlet></router-outlet>
+  </div>
+</div>
