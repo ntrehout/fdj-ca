@@ -4,16 +4,34 @@
 
 You can check my [Devblog](./DEVBLOG.md) for this project.
 
-## Angular App
-
-Install the packages, and you're good to go!
+## How to run
 
 ```bash
-npm
+npm config set @otwld:registry https://nexus.outworld.fr/repository/npm-group/
 
-# run app
-npm run start:client
+npm i
 
+# Run the app while proxying the API.
+npm run start
+```
+
+## Scraper
+
+```bash
+# scrap, then stores in a temporary database, then dump the DB to a file.
+nx run apps-scraper:generate
+```
+
+## Angular App
+
+```bash
 # run tests
-npm run test:client
+nx test apps-client
+```
+
+## API
+
+```bash
+# run app
+nx test apps-server
 ```
