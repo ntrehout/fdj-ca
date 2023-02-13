@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start:client": "nx run-many --target=serve --projects=apps-server,apps-client",
+    "start": "nx run-many --target=serve --projects=apps-server,apps-client",
     "test:client": "nx test client",
     "test": "nx run-many --target=test --all",
     "postinstall": "ngcc --properties es2015 browser module main"
