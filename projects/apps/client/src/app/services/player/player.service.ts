@@ -14,7 +14,6 @@ export class PlayerService extends CrudService<IPlayer> {
   }
 
   override getManyByIDs(ids: string[]) {
-    console.info(ids);
     return zip(...ids.map((id) => this.getOneByID(id))).pipe(
       map(
         (responses) =>

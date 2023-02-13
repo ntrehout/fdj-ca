@@ -59,9 +59,13 @@ export type ErrorResponse = {
 } & BaseResponse;
 
 export interface ICrudService<T> {
+  // eslint-disable-next-line rxjs/finnish
   getAll(query: GetAllQueryParams<T>): Observable<unknown>;
+  // eslint-disable-next-line rxjs/finnish
   getManyByIDs(ids: string[]): Observable<unknown>;
+  // eslint-disable-next-line rxjs/finnish
   getManyByName(name: string): Observable<unknown>;
+  // eslint-disable-next-line rxjs/finnish
   getOneByID(id: string): Observable<unknown>;
 }
 
