@@ -11,7 +11,7 @@ You can check my [Devblog](./DEVBLOG.md) for this project.
 Hello and welcome to my repository for the FDJ technical test.
 The purpose of this test is to create a web application that lists leagues, teams and players in world football.
 
-The dataset initially provided was a dump containing ~10 entities, which I found to be very lightweight to be able to
+The dataset initially provided was a dump containing ~10 entries, which I found to be very lightweight to be able to
 to represent the ability of the applications to handle the imaginary load of a sports betting site.
 
 I therefore decided to create my own dump, which led to the development of a scraper and dump generator.
